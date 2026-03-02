@@ -10,6 +10,7 @@ Console-based Java application for managing user accounts with **CSV file persis
 - Save accounts to file
 - Automatic save on exit
 - Simple menu-based interface
+- User session & separate menus
 
 ## Data Format
 
@@ -40,8 +41,7 @@ Example:
 
 ## Future Improvements (v2)
 
-- Login with email + PIN
-- User session & separate menus
+- Login with email + PIN ( instead of id )
 - Deposit / Withdraw operations
 - Activate / Deactivate accounts
 - Search & filtering
