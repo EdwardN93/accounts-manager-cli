@@ -24,8 +24,8 @@ public class Main {
             int cmd = Integer.parseInt(sc.nextLine());
 
             if (cmd == 1) {
-                System.out.print("Id: ");
-                int id = Integer.parseInt(sc.nextLine());
+
+                int id = db.getNextId();
 
                 System.out.print("Email: ");
                 String email = sc.nextLine();

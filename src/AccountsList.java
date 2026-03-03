@@ -5,6 +5,20 @@ public class AccountsList {
 
     private List<Account> accounts = new ArrayList<>();
 
+    public int getNextId(){
+        if(accounts.isEmpty()){
+            return 1;
+        }
+
+        int maxId = 0;
+        for(Account acc : accounts){
+            if(acc.getId() > maxId){
+                maxId = acc.getId();
+            }
+        }
+        return maxId + 1;
+    }
+
     public void add(Account acc) {
         accounts.add(acc);
     }
