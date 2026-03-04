@@ -10,10 +10,9 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         mainMenu(sc, db);
-
     }
 
-    public static void mainMenu(Scanner sc, AccountsList db){
+    public static void mainMenu(Scanner sc, AccountsList db) {
         while (true) {
             System.out.println("\n1 Add");
             System.out.println("2 Show");
@@ -24,7 +23,6 @@ public class Main {
             int cmd = Integer.parseInt(sc.nextLine());
 
             if (cmd == 1) {
-
                 int id = db.getNextId();
 
                 System.out.print("Email: ");
@@ -50,7 +48,7 @@ public class Main {
                 System.out.println("Saved.");
             }
 
-            if (cmd == 4){
+            if (cmd == 4) {
                 loginMenu(sc, db);
             }
 
@@ -61,9 +59,8 @@ public class Main {
         }
     }
 
-    public static void loginMenu(Scanner sc, AccountsList db){
-        while (true){
-
+    public static void loginMenu(Scanner sc, AccountsList db) {
+        while (true) {
             System.out.println("\n=== LOGIN ===");
             System.out.println("1 Login");
             System.out.println("0 Back");
@@ -81,23 +78,25 @@ public class Main {
 
                 if (acc != null) {
                     System.out.println("Welcome " + acc.getName());
-                    if(!acc.isAccountActive()){
-                        userActivation(sc,acc);
+
+                    if (acc.mustChangePin()) {
+                        userActivation(sc, acc);
                     }
-                    userMenu(sc, acc);
+
+                    userMenu(sc, acc, db);
+
                 } else {
                     System.out.println("Invalid credentials");
                 }
             }
 
-            if (cmd == 0){
+            if (cmd == 0) {
                 break;
             }
         }
     }
 
-    public static void userMenu(Scanner sc, Account acc) {
-
+    public static void userMenu(Scanner sc, Account acc, AccountsList db) {
         while (true) {
             System.out.println("\n=== USER MENU ===");
             System.out.println("1. Show Account Info");
@@ -106,22 +105,38 @@ public class Main {
             System.out.println("4. Withdraw");
             System.out.println("5. Change pin");
             System.out.println("6. Logout");
-
             System.out.println("0 Logout");
 
             int cmd = Integer.parseInt(sc.nextLine());
 
             if (cmd == 1) {
-                System.out.println("Balance: " + acc.toCsv());
+                System.out.println(acc);
             }
 
-            if(cmd == 2){
+            if (cmd == 2) {
+                System.out.println("Balance: " + acc.getBalance());
+            }
+
+            if (cmd == 3) {
                 System.out.print("Enter amount to add: ");
                 int amount = Integer.parseInt(sc.nextLine());
                 System.out.println(acc.addBalance(amount));
             }
 
-            if (cmd == 0) {
+            if (cmd == 4) {
+                System.out.print("Enter amount to withdraw: ");
+                int amount = Integer.parseInt(sc.nextLine());
+                System.out.println(acc.withdraw(amount));
+            }
+
+            if (cmd == 5) {
+                System.out.print("Enter new pin: ");
+                int newPin = Integer.parseInt(sc.nextLine());
+                System.out.println(acc.changePin(newPin));
+            }
+
+            if (cmd == 6 || cmd == 0) {
+                db.saveToFile("accounts.txt");
                 break;
             }
         }
@@ -131,17 +146,11 @@ public class Main {
         System.out.println("Welcome to activation page.");
         System.out.println("In order to continue you must change your pin.");
 
-        while (true) {
+        while (acc.mustChangePin()) {
             System.out.print("Enter new pin: ");
             int newPin = Integer.parseInt(sc.nextLine());
 
             System.out.println(acc.changePin(newPin));
-
-            if (acc.isAccountActive()) {
-                System.out.println("Account activated successfully.");
-                break;
-            }
         }
     }
-
 }
