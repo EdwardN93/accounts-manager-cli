@@ -74,13 +74,16 @@ public class Main {
                 System.out.print("Email: ");
                 String email = sc.nextLine();
 
-                System.out.print("Id: ");
-                int id = Integer.parseInt(sc.nextLine());
+                System.out.print("Pin: ");
+                int pin = Integer.parseInt(sc.nextLine());
 
-                Account acc = db.findByEmailAndId(email, id);
+                Account acc = db.login(email, pin);
 
                 if (acc != null) {
                     System.out.println("Welcome " + acc.getName());
+                    if(!acc.isAccountActive()){
+                        userActivation(sc,acc);
+                    }
                     userMenu(sc, acc);
                 } else {
                     System.out.println("Invalid credentials");
@@ -94,18 +97,48 @@ public class Main {
     }
 
     public static void userMenu(Scanner sc, Account acc) {
+
         while (true) {
             System.out.println("\n=== USER MENU ===");
-            System.out.println("1 Show balance");
+            System.out.println("1. Show Account Info");
+            System.out.println("2. Show balance");
+            System.out.println("3. Add balance");
+            System.out.println("4. Withdraw");
+            System.out.println("5. Change pin");
+            System.out.println("6. Logout");
+
             System.out.println("0 Logout");
 
             int cmd = Integer.parseInt(sc.nextLine());
 
             if (cmd == 1) {
-                System.out.println("Balance: " + acc.getBalance());
+                System.out.println("Balance: " + acc.toCsv());
+            }
+
+            if(cmd == 2){
+                System.out.print("Enter amount to add: ");
+                int amount = Integer.parseInt(sc.nextLine());
+                System.out.println(acc.addBalance(amount));
             }
 
             if (cmd == 0) {
+                break;
+            }
+        }
+    }
+
+    public static void userActivation(Scanner sc, Account acc) {
+        System.out.println("Welcome to activation page.");
+        System.out.println("In order to continue you must change your pin.");
+
+        while (true) {
+            System.out.print("Enter new pin: ");
+            int newPin = Integer.parseInt(sc.nextLine());
+
+            System.out.println(acc.changePin(newPin));
+
+            if (acc.isAccountActive()) {
+                System.out.println("Account activated successfully.");
                 break;
             }
         }

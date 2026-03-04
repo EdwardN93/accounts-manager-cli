@@ -55,10 +55,15 @@ public class AccountsList {
         }
     }
 
-    public Account findByEmailAndId(String email, int id){
-        for (Account acc : accounts){
-            if(acc.getEmail().equals(email) && acc.getId() == id){
-                return acc;
+    public Account login(String email, int pin){
+        for(Account acc : accounts){
+            if(acc.getEmail().equals(email)){
+                if(!acc.isAccountActive()){
+                    return null;
+                }
+                if(acc.checkPin(pin)){
+                    return acc;
+                }
             }
         }
         return null;
