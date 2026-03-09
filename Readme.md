@@ -7,6 +7,8 @@ Console-based Java application for managing user accounts with **CSV file persis
 - Load accounts from file at startup
 - Add new accounts
 - Display all accounts
+- Login with email + PIN
+- Deposit / Withdraw operations
 - Save accounts to file
 - Automatic save on exit
 - Simple menu-based interface
@@ -17,13 +19,12 @@ Console-based Java application for managing user accounts with **CSV file persis
 Accounts are stored in `accounts.txt`:
 
 
-id,email,name,balance,active
+id,email,name,balance,active,pin,mustChangePin,failedAttempts,locked
 
 
 Example:
 
-1,john@email.com
-,John Doe,1500.0,true
+1,john@email.com,John Doe,1600.0,true,1111,true,0,false
 
 
 ## Project Structure
@@ -41,8 +42,6 @@ Example:
 
 ## Future Improvements (v2)
 
-- Login with email + PIN ( instead of id )
-- Deposit / Withdraw operations
 - Activate / Deactivate accounts
 - Search & filtering
 - Extended persistence (PIN, roles)

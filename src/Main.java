@@ -33,8 +33,13 @@ public class Main {
 
                 System.out.print("Balance: ");
                 double balance = Double.parseDouble(sc.nextLine());
+                System.out.println("Default pin is set to 1111");
+                System.out.println("Make sure to change it first time you log into your account.");
 
                 System.out.println(db.add(new Account(id, email, name, balance, true)));
+
+                db.add(new Account(id, email, name, balance, true));
+                db.saveToFile("accounts.txt");
 
             }
 
