@@ -19,8 +19,15 @@ public class AccountsList {
         return maxId + 1;
     }
 
-    public void add(Account acc) {
+    public String add(Account acc) {
+
+        for(Account account : accounts){
+            if(account.getEmail().equals(acc.getEmail())){
+                return "Email is already in use, please login";
+            }
+        }
         accounts.add(acc);
+        return "Account created successfully!";
     }
 
     public List<Account> getAll() {

@@ -99,7 +99,7 @@ public class Account {
     }
 
     public String changePin(int newPin) {
-        if (newPin < 1000 || newPin > 9999) {
+        if (newPin < 1000 || newPin > 9999 || newPin == pin) {
             return "Invalid pin, try again";
         }
         this.pin = newPin;

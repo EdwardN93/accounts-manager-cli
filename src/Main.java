@@ -34,7 +34,8 @@ public class Main {
                 System.out.print("Balance: ");
                 double balance = Double.parseDouble(sc.nextLine());
 
-                db.add(new Account(id, email, name, balance, true));
+                System.out.println(db.add(new Account(id, email, name, balance, true)));
+
             }
 
             if (cmd == 2) {
@@ -104,7 +105,6 @@ public class Main {
             System.out.println("3. Add balance");
             System.out.println("4. Withdraw");
             System.out.println("5. Change pin");
-            System.out.println("6. Logout");
             System.out.println("0 Logout");
 
             int cmd = Integer.parseInt(sc.nextLine());
@@ -135,7 +135,7 @@ public class Main {
                 System.out.println(acc.changePin(newPin));
             }
 
-            if (cmd == 6 || cmd == 0) {
+            if (cmd == 0) {
                 db.saveToFile("accounts.txt");
                 break;
             }
