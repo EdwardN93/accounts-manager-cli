@@ -35,18 +35,22 @@ public class Account {
     }
 
 
-    public String addBalance(int amount) {
+    public String addBalance(double amount) {
         if (amount <= 0) return "Your amount should be higher than 0";
         balance += amount;
         return "Your balance is: " + balance;
     }
 
-    public String withdraw(int amount) {
-        if (amount <= 0) return "Your amount should be higher than 0";
-        if (amount > balance) return "Your balance is: " + balance + ". The amount to withdraw exceeds your balance";
+    public boolean withdraw(double amount) {
 
+        if (amount <= 0){
+            return false;
+        }
+        if (amount > balance){
+            return false;
+        }
         balance -= amount;
-        return "Withdrawal successful. Balance: " + balance;
+        return true;
     }
 
 

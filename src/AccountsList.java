@@ -75,4 +75,24 @@ public class AccountsList {
         }
         return null;
     }
+
+    public String transferMoney(Account accFrom, String emailTo, double amount){
+        if(accFrom.getEmail().equals(emailTo)){
+            return "You cannot transfer to your own account";
+        }
+        if(amount <= 0){
+            return "Amount must be positive number";
+        }
+        for(Account acc : accounts){
+            if(acc.getEmail().equals(emailTo)){
+                if(!accFrom.withdraw(amount)){
+                    return "Transfer failed";
+                }
+                System.out.println("Account found.");
+                acc.addBalance(amount);
+                return "Successfuly transfered " + amount + " to " + emailTo;
+            }
+        }
+        return "Account not found";
+    }
 }

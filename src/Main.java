@@ -110,6 +110,7 @@ public class Main {
             System.out.println("3. Add balance");
             System.out.println("4. Withdraw");
             System.out.println("5. Change pin");
+            System.out.println("6. Transfer money");
             System.out.println("0 Logout");
 
             int cmd = Integer.parseInt(sc.nextLine());
@@ -138,6 +139,16 @@ public class Main {
                 System.out.print("Enter new pin: ");
                 int newPin = Integer.parseInt(sc.nextLine());
                 System.out.println(acc.changePin(newPin));
+            }
+
+            if (cmd == 6) {
+                System.out.print("Enter email of destination account: ");
+                String emailTo = sc.nextLine();
+                System.out.print("Enter amount to transfer: ");
+                double amount = Double.parseDouble(sc.nextLine());
+
+                System.out.println(db.transferMoney(acc, emailTo.trim(), amount));
+                db.saveToFile("accounts.txt");
             }
 
             if (cmd == 0) {
