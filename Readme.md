@@ -9,6 +9,7 @@ Console-based Java application for managing user accounts with **CSV file persis
 - Display all accounts
 - Login with email + PIN
 - Deposit / Withdraw operations
+- Transfer between accounts
 - Save accounts to file
 - Automatic save on exit
 - Simple menu-based interface
@@ -40,11 +41,10 @@ Example:
 - ArrayList
 - File I/O (Scanner, FileWriter)
 
-## Future Improvements (v2)
+## Future Improvements
 
-- Activate / Deactivate accounts
-- Search & filtering
-- Extended persistence (PIN, roles)
+- Transaction history
+- Pin hashing for better security
 
 ---
 
